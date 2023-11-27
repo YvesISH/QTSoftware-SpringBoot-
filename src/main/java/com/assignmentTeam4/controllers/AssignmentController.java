@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api/v1/assignments")
+@RequestMapping("/api/v1/tasks")
 public class AssignmentController {
 
     private final AssignmentService assignmentService;
@@ -42,7 +42,7 @@ public class AssignmentController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createAssignment(@RequestBody AssignmentDTO assignmentDTO) {
+    public ResponseEntity<Object> createATask(@RequestBody AssignmentDTO assignmentDTO) {
         User currentUser = userService.getLoggedInUser();
             Assignment assignment = convertToEntity(assignmentDTO);
 
@@ -65,7 +65,7 @@ public class AssignmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateAssignment(@PathVariable Long id, @RequestBody AssignmentDTO assignmentDTO) {
+    public ResponseEntity<?> updateATask(@PathVariable Long id, @RequestBody AssignmentDTO assignmentDTO) {
         User currentUser = userService.getLoggedInUser();
 
         Optional<Assignment> assignmentOpt = assignmentService.getAssignmentById(id);
@@ -83,7 +83,7 @@ public class AssignmentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAssignment(@PathVariable Long id) {
+    public ResponseEntity<?> deleteATask(@PathVariable Long id) {
         User currentUser = userService.getLoggedInUser();
 
         Optional<Assignment> assignmentOpt = assignmentService.getAssignmentById(id);
@@ -93,7 +93,7 @@ public class AssignmentController {
 
         Assignment assignment = assignmentOpt.get();
 
-        assignmentService.deleteAssignment(id);
+        assignmentService.deleteATask(id);
         return new ResponseEntity<>("Assignment deleted successfully", HttpStatus.OK);
     }
 
